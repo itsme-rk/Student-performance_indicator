@@ -1,0 +1,6 @@
+pandas
+numpy
+seaborn
+matplotlib
+-e .
+ ###this is addded sp that when this file is run the setup.py is also triggered , and to avoid this line to be read in setup file we have a seperate function
