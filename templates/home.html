@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Exam Performance Indicator</title>
+    <style>
+        /* Reset and Global Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to right, #1c92d2, #f2fcfe);
+            color: #333;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            width: 100%;
+            padding: 20px 30px;
+            background-color: #023047;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            font-size: 1.8rem;
+            color: #ffb703;
+            margin: 0;
+        }
+
+        .navbar a {
+            color: #f4f4f9;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* Container Styling */
+        .container {
+            margin-top: 140px;
+            width: 90%;
+            max-width: 800px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0.95;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #023047;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #219ebc;
+        }
+
+        h2 {
+            color: #8d99ae;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #023047;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #8ecae6;
+            border-radius: 10px;
+            font-size: 1rem;
+            background-color: #edf6f9;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: #219ebc;
+            outline: none;
+        }
+
+        /* Submit Button Styling */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background-color: #ffb703;
+            border: none;
+            border-radius: 10px;
+            color: #023047;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-align: center;
+            display: inline-block;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            background-color: #fb8500;
+        }
+
+        /* Footer Styling */
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            background-color: #023047;
+            color: #f4f4f9;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Performance Predictor</h1>
+        <a href="{{ url_for('home') }}">Home</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>Student Exam Performance Indicator</h1>
+        <form action="{{ url_for('predict_datapoint')}}" method="post">
+            <h2>Enter the details for the below</h2>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control" id="gender" name="gender" required>
+                    <option selected disabled value="">Select your Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ethnicity">Race or Ethnicity</label>
+                <select class="form-control" id="ethnicity" name="ethnicity" required>
+                    <option selected disabled value="">Select Ethnicity</option>
+                    <option value="group A">Group A</option>
+                    <option value="group B">Group B</option>
+                    <option value="group C">Group C</option>
+                    <option value="group D">Group D</option>
+                    <option value="group E">Group E</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="education">Parental Level of Education</label>
+                <select class="form-control" id="education" name="parental_level_of_education" required>
+                    <option selected disabled value="">Select Parent Education</option>
+                    <option value="associate's degree">associate's degree</option>
+                    <option value="bachelor's degree">bachelor's degree</option>
+                    <option value="high school">high school</option>
+                    <option value="master's degree">master's degree</option>
+                    <option value="some college">some college</option>
+                    <option value="some high school">some high school</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="lunch">Lunch Type</label>
+                <select class="form-control" id="lunch" name="lunch" required>
+                    <option selected disabled value="">Select Lunch Type</option>
+                    <option value="free/reduced">free/reduced</option>
+                    <option value="standard">standard</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="test_course">Test Preparation Course</label>
+                <select class="form-control" id="test_course" name="test_preparation_course" required>
+                    <option selected disabled value="">Select Test Course</option>
+                    <option value="none">None</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="writing_score">Writing Score (out of 100)</label>
+                <input class="form-control" id="writing_score" type="number" name="writing_score" min="0" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="reading_score">Reading Score (out of 100)</label>
+                <input class="form-control" id="reading_score" type="number" name="reading_score" min="0" max="100" required>
+            </div>
+            <button type="submit" class="btn-primary">Predict Your Math Score</button>
+        </form>
+        <h2>The prediction is: {{ results }}</h2>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Student Performance Predictor. All Rights Reserved.</p>
+    </div>
+</body>
+</html>
